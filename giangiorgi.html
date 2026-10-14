@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>San Giorgi Neumáticos | Venta y Asesoría Profesional</title>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        :root {
+            --primary-dark: #0f172a;
+            --primary-card: #1e293b;
+            --burgundy: #802228;
+            --burgundy-hover: #671b20;
+            --silver-light: #f8fafc;
+            --silver-border: #e2e8f0;
+            --accent-glow: rgba(128, 34, 40, 0.35);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--silver-light);
+            color: #1e293b;
+            overflow-x: hidden;
+        }
+
+        /* Navbar Dinámica */
+        .navbar-custom {
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .logo-emblem {
+            width: 44px;
+            height: 44px;
+            background: radial-gradient(circle, #f8fafc 60%, #cbd5e1 100%);
+            border: 2px solid #94a3b8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .logo-emblem:hover {
+            transform: rotate(15deg) scale(1.08);
+            box-shadow: 0 0 25px var(--accent-glow);
+        }
+
+        .logo-text-s {
+            color: var(--burgundy);
+            font-weight: 900;
+            font-size: 1.5rem;
+            line-height: 1;
+            font-family: 'Inter', sans-serif;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        /* Hero Section Avanzado */
+        .hero-section {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #291518 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 120px 0;
+            color: white;
+        }
+
+        .hero-bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(rgba(128, 34, 40, 0.15) 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.6;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Botón Burgundio Dinámico */
+        .btn-burgundy {
+            background-color: var(--burgundy);
+            color: white;
+            font-weight: 600;
+            border: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(128, 34, 40, 0.4);
+        }
+
+        .btn-burgundy:hover {
+            background-color: var(--burgundy-hover);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(128, 34, 40, 0.6);
+        }
+
+        /* Tarjetas de Productos Ultra Dinámicas */
+        .product-card {
+            background: white;
+            border: 1px solid var(--silver-border);
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--burgundy);
+            box-shadow: 0 20px 30px -10px rgba(128, 34, 40, 0.2);
+        }
+
+        .product-img-wrapper {
+            height: 220px;
+            background: radial-gradient(circle, #f8fafc 0%, #e2e8f0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-img-wrapper img {
+            max-height: 85%;
+            max-width: 85%;
+            object-fit: contain;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-img-wrapper img {
+            transform: scale(1.1) rotate(2deg);
+        }
+
+        .badge-brand-custom {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: var(--primary-dark);
+            color: white;
+            font-size: 0.75rem;
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            z-index: 3;
+        }
+
+        .badge-type-custom {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: rgba(128, 34, 40, 0.1);
+            color: var(--burgundy);
+            font-size: 0.75rem;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-weight: 600;
+            z-index: 3;
+        }
+
+        /* Buscador / Filtro flotante */
+        .search-filter-box {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            margin-top: -55px;
+            position: relative;
+            z-index: 10;
+            border: 1px solid var(--silver-border);
+        }
+
+        /* Animaciones de Entrada (Scroll Reveal) */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal-on-scroll.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Animación de Pulso para Carrito */
+        @keyframes badgePulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
+        .badge-pulse {
+            animation: badgePulse 0.4s ease;
+        }
+
+        /* Beneficios Card */
+        .benefit-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid var(--silver-border);
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            border-color: var(--burgundy);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(128, 34, 40, 0.1);
+            color: var(--burgundy);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover .benefit-icon {
+            background: var(--burgundy);
+            color: white;
+        }
+
+        /* Toast Personalizado */
+        .custom-toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1080;
+            background: var(--primary-dark);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transform: translateY(120px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-left: 5px solid var(--burgundy);
+        }
+
+        .custom-toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: #94a3b8;
+        }
+
+        footer h5 {
+            color: white;
+            font-weight: 700;
+        }
+
+        /* Offcanvas Carrito */
+        .offcanvas {
+            background-color: #f8fafc;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Toast Notificación -->
+    <div id="toastNotification" class="custom-toast">
+        <i class="fa-solid fa-circle-check text-success fs-4"></i>
+        <div>
+            <h6 class="mb-0 fw-bold text-white" id="toastTitle">¡Acción exitosa!</h6>
+            <small class="text-light opacity-75" id="toastMsg">El producto fue procesado correctamente.</small>
+        </div>
+    </div>
+
+    <!-- Barra de Navegación Profesional -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-3 text-decoration-none" href="#">
+                <div class="logo-emblem">
+                    <span class="logo-text-s">S</span>
+                </div>
+                <div class="d-flex flex-column">
+                    <span class="fw-extrabold fs-5 tracking-tight text-white lh-1">SAN GIORGI</span>
+                    <span class="small tracking-widest text-uppercase fw-semibold" style="color: #cbd5e1; font-size: 0.68rem;">Neumáticos Premium</span>
+                </div>
+            </a>
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-lg-center gap-lg-3 my-3 my-lg-0">
+                    <li class="nav-item"><a class="nav-link fw-medium active" href="#catalogo">Catálogo</a></li>
+                    <li class="nav-item"><a class="nav-link fw-medium" href="#buscador">Buscador</a></li>
+                    <li class="nav-item"><a class="nav-link fw-medium" href="#beneficios">Beneficios</a></li>
+                    <li class="nav-item"><a class="nav-link fw-medium" href="#contacto">Contacto</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <button class="btn btn-burgundy position-relative px-4 py-2 rounded-pill shadow-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+                            <i class="fa-solid fa-cart-shopping me-2"></i> Carrito
+                            <span id="cartCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section Ultra Dinámico -->
+    <header class="hero-section text-center text-lg-start">
+        <div class="hero-bg-pattern"></div>
+        <div class="container hero-content">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-7">
+                    <span class="badge bg-danger bg-opacity-25 text-danger px-3 py-2 rounded-pill fw-bold mb-4 border border-danger border-opacity-25">
+                        <i class="fa-solid fa-fire me-2"></i> Tecnología y Agarre Extremo
+                    </span>
+                    <h1 class="display-3 fw-black text-white mb-4 tracking-tight" style="line-height: 1.1;">
+                        Seguridad y Potencia en Cada <span style="color: #e2e8f0; text-decoration: underline; text-decoration-color: var(--burgundy);">Kilómetro</span>
+                    </h1>
+                    <p class="lead text-light opacity-85 mb-5 fs-5">
+                        Distribuidor autorizado de las marcas líderes mundiales. Compuestos diseñados para máxima adherencia, durabilidad superior y respuesta precisa en cualquier terreno.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
+                        <a href="#catalogo" class="btn btn-burgundy btn-lg px-5 py-3 rounded-pill fw-bold shadow-lg">
+                            <i class="fa-solid fa-compass me-2"></i> Explorar Catálogo
+                        </a>
+                        <a href="#buscador" class="btn btn-outline-light btn-lg px-4 py-3 rounded-pill fw-semibold">
+                            <i class="fa-solid fa-magnifying-glass me-2"></i> Buscar Medida
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-5 text-center">
+                    <div class="position-relative">
+                        <div class="position-absolute top-50 start-50 translate-middle rounded-circle bg-danger opacity-25 filter blur-3xl" style="width: 300px; height: 300px; z-index: 0;"></div>
+                        <img src="https://images.unsplash.com/photo-1578844251758-2f71da64c96f?auto=format&fit=crop&w=650&q=80" alt="Neumático Deportivo San Giorgi" class="img-fluid rounded-4 shadow-2xl position-relative z-1 border border-secondary border-opacity-25" style="max-height: 420px; object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Buscador & Filtros Avanzados -->
+    <section class="container" id="buscador">
+        <div class="search-filter-box p-4 p-md-5 reveal-on-scroll">
+            <div class="row g-4 align-items-center">
+                <div class="col-12 text-center mb-1">
+                    <h3 class="fw-bold text-dark">Buscador Inteligente de Neumáticos</h3>
+                    <p class="text-muted small mb-0">Encuentra exactamente lo que tu vehículo necesita filtrando por tipo o marca</p>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-bold text-secondary small uppercase tracking-wider">Tipo de Vehículo</label>
+                    <select id="filterType" class="form-select form-select-lg bg-light border-0 shadow-none fw-medium text-dark">
+                        <option value="all">Todos los tipos</option>
+                        <option value="Turismo">Turismo / Automóvil</option>
+                        <option value="SUV">SUV / 4x4</option>
+                        <option value="Camioneta">Camioneta / Comercial</option>
+                        <option value="Alto Rendimiento">Alto Rendimiento (Sport)</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-bold text-secondary small uppercase tracking-wider">Marca Preferida</label>
+                    <select id="filterBrand" class="form-select form-select-lg bg-light border-0 shadow-none fw-medium text-dark">
+                        <option value="all">Todas las marcas</option>
+                        <option value="Michelin">Michelin</option>
+                        <option value="Pirelli">Pirelli</option>
+                        <option value="Bridgestone">Bridgestone</option>
+                        <option value="Goodyear">Goodyear</option>
+                        <option value="Continental">Continental</option>
+                    </select>
+                </div>
+                <div class="col-md-4 d-flex align-items-end">
+                    <button id="btnFilter" class="btn btn-burgundy btn-lg w-100 py-3 fw-bold rounded-3 shadow-sm">
+                        <i class="fa-solid fa-filter me-2"></i> Aplicar Filtros
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catálogo de Productos Principal -->
+    <main class="container py-5 my-4" id="catalogo">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-5 gap-3">
+            <div class="reveal-on-scroll">
+                <span class="text-danger fw-bold text-uppercase small tracking-widest">Disponibilidad Inmediata</span>
+                <h2 class="fw-black text-dark display-6 mb-1">Nuestro Catálogo Exclusivo</h2>
+                <p class="text-muted mb-0">Neumáticos certificados con los más altos estándares internacionales de seguridad</p>
+            </div>
+            <span class="badge bg-dark text-light px-4 py-2 rounded-pill fs-6 fw-semibold align-self-start align-self-md-center" id="productCount">Cargando...</span>
+        </div>
+
+        <div class="row g-4" id="productsGrid">
+            <!-- Inyectado por JavaScript -->
+        </div>
+    </main>
+
+    <!-- Modal de Detalles de Producto -->
+    <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 rounded-4 shadow-lg overflow-hidden">
+                <div class="modal-header bg-dark text-white px-4 py-3">
+                    <h5 class="modal-title fw-bold" id="productModalLabel">Especificaciones Técnicas</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4 p-md-5 bg-white">
+                    <div class="row g-4 align-items-center">
+                        <div class="col-md-5 text-center bg-light p-4 rounded-4">
+                            <img id="modalImg" src="" alt="" class="img-fluid" style="max-height: 220px; object-fit: contain;">
+                        </div>
+                        <div class="col-md-7">
+                            <span id="modalBrandBadge" class="badge bg-dark mb-2">Marca</span>
+                            <h3 id="modalTitle" class="fw-bold text-dark mb-2">Modelo</h3>
+                            <p id="modalType" class="text-muted small mb-3">Tipo</p>
+                            <h4 id="modalPrice" class="text-danger fw-black mb-4">$0.00</h4>
+                            
+                            <ul class="list-unstyled mb-4 small text-secondary d-flex flex-column gap-2">
+                                <li><i class="fa-solid fa-ruler-combined text-danger me-2"></i> Medida exacta: <strong id="modalSize" class="text-dark"></strong></li>
+                                <li><i class="fa-solid fa-gauge-high text-danger me-2"></i> Índice de Velocidad / Carga: <strong id="modalSpeed" class="text-dark">V / 91W</strong></li>
+                                <li><i class="fa-solid fa-shield-halved text-danger me-2"></i> Garantía Oficial: <strong class="text-dark">5 Años de Fábrica</strong></li>
+                                <li><i class="fa-solid fa-road text-danger me-2"></i> Terreno recomendado: <strong class="text-dark">Pavimento seco y mojado</strong></li>
+                            </ul>
+
+                            <button id="modalAddToCartBtn" class="btn btn-burgundy w-100 py-3 rounded-pill fw-bold shadow-sm">
+                                <i class="fa-solid fa-cart-plus me-2"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección de Beneficios San Giorgi -->
+    <section class="py-5 bg-white border-top border-bottom my-5" id="beneficios">
+        <div class="container py-4">
+            <div class="text-center mb-5 reveal-on-scroll">
+                <span class="text-danger fw-bold text-uppercase small tracking-widest">Excelencia Operativa</span>
+                <h2 class="fw-black text-dark display-6">¿Por qué elegir San Giorgi Neumáticos?</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4 reveal-on-scroll">
+                    <div class="benefit-card h-100">
+                        <div class="benefit-icon">
+                            <i class="fa-solid fa-certificate"></i>
+                        </div>
+                        <h4 class="fw-bold text-dark mb-3">Garantía Certificada</h4>
+                        <p class="text-muted mb-0">Cada neumático comercializado cuenta con respaldo directo de fábrica y certificados internacionales de calidad.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 reveal-on-scroll">
+                    <div class="benefit-card h-100">
+                        <div class="benefit-icon">
+                            <i class="fa-solid fa-headset"></i>
+                        </div>
+                        <h4 class="fw-bold text-dark mb-3">Asesoría Profesional</h4>
+                        <p class="text-muted mb-0">Personal técnico altamente capacitado para recomendarte la medida y compuesto ideal para tu tipo de manejo.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 reveal-on-scroll">
+                    <div class="benefit-card h-100">
+                        <div class="benefit-icon">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                        </div>
+                        <div class="benefit-icon">
+                            <i class="fa-solid fa-gears"></i>
+                        </div>
+                        <h4 class="fw-bold text-dark mb-3">Montaje y Balanceo</h4>
+                        <p class="text-muted mb-0">Equipamiento tecnológico de última generación para alineación láser, balanceo computarizado y montaje seguro.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Profesional -->
+    <footer class="py-5" id="contacto">
+        <div class="container py-4">
+            <div class="row g-5 mb-5">
+                <div class="col-lg-4">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="logo-emblem">
+                            <span class="logo-text-s">S</span>
+                        </div>
+                        <h4 class="text-white fw-bold mb-0">San Giorgi Neumáticos</h4>
+                    </div>
+                    <p class="small text-muted mb-4">Líderes en el suministro de soluciones de tracción, seguridad y rendimiento para vehículos particulares, flotas y camionetas.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-white bg-secondary bg-opacity-25 p-2.5 rounded-circle text-decoration-none hover-bg-burgundy"><i class="fa-brands fa-facebook-f fa-fw"></i></a>
+                        <a href="#" class="text-white bg-secondary bg-opacity-25 p-2.5 rounded-circle text-decoration-none"><i class="fa-brands fa-instagram fa-fw"></i></a>
+                        <a href="#" class="text-white bg-secondary bg-opacity-25 p-2.5 rounded-circle text-decoration-none"><i class="fa-brands fa-whatsapp fa-fw"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="fw-bold mb-3">Navegación</h5>
+                    <ul class="list-unstyled small d-flex flex-column gap-2">
+                        <li><a href="#catalogo" class="text-muted text-decoration-none">Catálogo Completo</a></li>
+                        <li><a href="#buscador" class="text-muted text-decoration-none">Buscador Inteligente</a></li>
+                        <li><a href="#beneficios" class="text-muted text-decoration-none">Ventajas y Servicios</a></li>
+                        <li><a href="#contacto" class="text-muted text-decoration-none">Ubicación y Horarios</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="fw-bold mb-3">Horario de Atención</h5>
+                    <p class="small text-muted mb-1">Lunes a Viernes: 8:00 AM - 6:00 PM</p>
+                    <p class="small text-muted mb-1">Sábados: 8:00 AM - 2:00 PM</p>
+                    <p class="small text-muted">Domingos: Cerrado</p>
+                </div>
+                <div class="col-lg-3">
+                    <h5 class="fw-bold mb-3">Contacto Corporativo</h5>
+                    <p class="small text-muted mb-2"><i class="fa-solid fa-phone text-danger me-2"></i> +58 (412) 000-0000</p>
+                    <p class="small text-muted mb-2"><i class="fa-solid fa-envelope text-danger me-2"></i> ventas@sangiorgineumaticos.com</p>
+                    <p class="small text-muted"><i class="fa-solid fa-location-dot text-danger me-2"></i> Av. Principal Comercial, Zona Industrial</p>
+                </div>
+            </div>
+            <hr class="border-secondary border-opacity-25">
+            <div class="row pt-3 text-center text-md-start">
+                <div class="col-md-6 small text-muted">
+                    &copy; 2026 San Giorgi Neumáticos. Todos los derechos reservados.
+                </div>
+                <div class="col-md-6 text-md-end small text-muted">
+                    Diseño Web Profesional & Ultra Dinámico
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Offcanvas Carrito de Compras -->
+    <div class="offcanvas offcanvas-end shadow-lg" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
+        <div class="offcanvas-header bg-dark text-white py-4 px-4">
+            <h5 class="offcanvas-title fw-bold" id="cartOffcanvasLabel"><i class="fa-solid fa-cart-shopping me-2 text-danger"></i> Tu Carrito de Compras</h5>
+            <button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column justify-content-between p-4">
+            <div id="cartItemsContainer" class="overflow-auto pe-1" style="max-height: 52vh;">
+                <!-- Items cargados dinámicamente -->
+                <div class="text-center text-muted py-5" id="emptyCartMessage">
+                    <i class="fa-solid fa-basket-shopping fa-3x mb-3 opacity-50"></i>
+                    <p class="fw-medium">Tu carrito está vacío</p>
+                </div>
+            </div>
+            
+            <div class="border-top pt-4 mt-3 bg-light">
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="fw-semibold text-secondary">Subtotal:</span>
+                    <span class="fw-bold text-dark" id="cartSubtotal">$0.00</span>
+                </div>
+                <div class="d-flex justify-content-between mb-4">
+                    <span class="fw-semibold text-secondary">Total a Pagar:</span>
+                    <span class="fw-black fs-4 text-danger" id="cartTotal">$0.00</span>
+                </div>
+                <button id="whatsappCheckoutBtn" class="btn btn-success w-100 py-3 fw-bold rounded-pill d-flex align-items-center justify-content-center gap-2 shadow-sm disabled">
+                    <i class="fa-brands fa-whatsapp fs-5"></i> Enviar pedido por WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Script de Interactividad y Animaciones -->
+    <script>
+        // Base de datos de productos de San Giorgi
+        const products = [
+            {
+                id: 1,
+                brand: "Michelin",
+                model: "Pilot Sport 4",
+                size: "225/45 R17",
+                type: "Alto Rendimiento",
+                price: 145.00,
+                speedRating: "94Y (Hasta 300 km/h)",
+                image: "https://images.unsplash.com/photo-1578844251758-2f71da64c96f?auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                id: 2,
+                brand: "Pirelli",
+                model: "Scorpion Verde",
+                size: "265/65 R17",
+                type: "SUV",
+                price: 185.00,
+                speedRating: "112H (Hasta 210 km/h)",
+                image: "https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                id: 3,
+                brand: "Bridgestone",
+                model: "Turanza T005",
+                size: "195/65 R15",
+                type: "Turismo",
+                price: 98.00,
+                speedRating: "91H (Hasta 210 km/h)",
+                image: "https://images.unsplash.com/photo-1578844251758-2f71da64c96f?auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                id: 4,
+                brand: "Goodyear",
+                model: "Wrangler DuraTrac",
+                size: "285/70 R17",
+                type: "Camioneta",
+                price: 230.00,
+                speedRating: "121/118Q (Todo Terreno)",
+                image: "https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                id: 5,
+                brand: "Continental",
+                model: "ContiEcoContact 6",
+                size: "205/55 R16",
+                type: "Turismo",
+                price: 115.00,
+                speedRating: "91V (Hasta 240 km/h)",
+                image: "https://images.unsplash.com/photo-1578844251758-2f71da64c96f?auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                id: 6,
+                brand: "Michelin",
+                model: "Latitude Sport 3",
+                size: "235/60 R18",
+                type: "SUV",
+                price: 210.00,
+                speedRating: "103W (Hasta 270 km/h)",
+                image: "https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                id: 7,
+                brand: "Pirelli",
+                model: "P Zero",
+                size: "245/40 R19",
+                type: "Alto Rendimiento",
+                price: 275.00,
+                speedRating: "98Y (Hasta 300 km/h)",
+                image: "https://images.unsplash.com/photo-1578844251758-2f71da64c96f?auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                id: 8,
+                brand: "Bridgestone",
+                model: "Dueler A/T 001",
+                size: "245/70 R16",
+                type: "Camioneta",
+                price: 165.00,
+                speedRating: "107S (Hasta 180 km/h)",
+                image: "https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=500&q=80"
+            }
+        ];
+
+        let cart = [];
+        let currentModalProductId = null;
+
+        // Referencias DOM
+        const productsGrid = document.getElementById('productsGrid');
+        const productCount = document.getElementById('productCount');
+        const filterType = document.getElementById('filterType');
+        const filterBrand = document.getElementById('filterBrand');
+        const btnFilter = document.getElementById('btnFilter');
+        const cartItemsContainer = document.getElementById('cartItemsContainer');
+        const emptyCartMessage = document.getElementById('emptyCartMessage');
+        const cartCount = document.getElementById('cartCount');
+        const cartSubtotal = document.getElementById('cartSubtotal');
+        const cartTotal = document.getElementById('cartTotal');
+        const whatsappCheckoutBtn = document.getElementById('whatsappCheckoutBtn');
+        const toastNotification = document.getElementById('toastNotification');
+        const toastTitle = document.getElementById('toastTitle');
+        const toastMsg = document.getElementById('toastMsg');
+
+        // Mostrar notificación toast estilizada
+        function showToast(title, message) {
+            toastTitle.textContent = title;
+            toastMsg.textContent = message;
+            toastNotification.classList.add('show');
+            setTimeout(() => {
+                toastNotification.classList.remove('show');
+            }, 3500);
+        }
+
+        // Renderizar productos en el catálogo
+        function renderProducts(itemsToRender) {
+            productsGrid.innerHTML = '';
+            productCount.textContent = `Mostrando ${itemsToRender.length} neumáticos`;
+
+            if (itemsToRender.length === 0) {
+                productsGrid.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="fa-solid fa-triangle-exclamation fa-3x text-muted mb-3 opacity-50"></i>
+                        <h5 class="text-secondary fw-semibold">No se encontraron neumáticos con los filtros seleccionados</h5>
+                    </div>
+                `;
+                return;
+            }
+
+            itemsToRender.forEach(product => {
+                const col = document.createElement('div');
+                col.className = 'col-md-6 col-lg-3 reveal-on-scroll active';
+                col.innerHTML = `
+                    <div class="product-card h-100 d-flex flex-column">
+                        <div class="product-img-wrapper">
+                            <span class="badge-brand-custom">${product.brand}</span>
+                            <span class="badge-type-custom">${product.type}</span>
+                            <img src="${product.image}" alt="${product.model}" onerror="this.src='https://placehold.co/400x300/1e293b/ffffff?text=San+Giorgi'">
+                        </div>
+                        <div class="p-4 d-flex flex-column flex-grow-1 bg-white">
+                            <h5 class="fw-bold text-dark mb-1">${product.model}</h5>
+                            <p class="text-secondary small mb-3"><i class="fa-solid fa-ruler-combined me-1 text-danger"></i> Medida: <strong>${product.size}</strong></p>
+                            <div class="mt-auto d-flex align-items-center justify-content-between pt-3 border-top">
+                                <div>
+                                    <span class="small text-muted d-block lh-1">Precio Unit.</span>
+                                    <span class="fs-5 fw-black text-dark">$${product.price.toFixed(2)}</span>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button onclick="openProductModal(${product.id})" class="btn btn-outline-dark btn-sm rounded-circle p-2" title="Ver Detalles">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                    <button onclick="addToCart(${product.id})" class="btn btn-burgundy btn-sm px-3 rounded-pill fw-semibold shadow-sm">
+                                        <i class="fa-solid fa-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                productsGrid.appendChild(col);
+            });
+        }
+
+        // Filtrar productos
+        function filterProducts() {
+            const typeVal = filterType.value;
+            const brandVal = filterBrand.value;
+
+            let filtered = products;
+
+            if (typeVal !== 'all') {
+                filtered = filtered.filter(p => p.type === typeVal);
+            }
+            if (brandVal !== 'all') {
+                filtered = filtered.filter(p => p.brand === brandVal);
+            }
+
+            renderProducts(filtered);
+        }
+
+        btnFilter.addEventListener('click', filterProducts);
+
+        // Abrir Modal de Detalles
+        window.openProductModal = function(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            currentModalProductId = product.id;
+            document.getElementById('modalImg').src = product.image;
+            document.getElementById('modalBrandBadge').textContent = product.brand;
+            document.getElementById('modalTitle').textContent = product.model;
+            document.getElementById('modalType').textContent = `Categoría: ${product.type}`;
+            document.getElementById('modalPrice').textContent = `$${product.price.toFixed(2)}`;
+            document.getElementById('modalSize').textContent = product.size;
+            document.getElementById('modalSpeed').textContent = product.speedRating;
+
+            const modal = new bootstrap.Modal(document.getElementById('productModal'));
+            modal.show();
+        }
+
+        // Agregar desde el modal
+        document.getElementById('modalAddToCartBtn').addEventListener('click', function() {
+            if (currentModalProductId) {
+                addToCart(currentModalProductId);
+                const modalEl = document.getElementById('productModal');
+                const modal = bootstrap.Modal.getInstance(modalEl);
+                modal.hide();
+            }
+        });
+
+        // Agregar al Carrito
+        window.addToCart = function(productId) {
+            const product = products.find(p => p.id === productId);
+            const existing = cart.find(item => item.id === productId);
+
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            updateCartUI();
+            
+            // Animación pulso badge
+            cartCount.classList.add('badge-pulse');
+            setTimeout(() => cartCount.classList.remove('badge-pulse'), 400);
+
+            showToast("¡Producto agregado!", `${product.brand} ${product.model} (${product.size}) añadido al carrito.`);
+        }
+
+        // Cambiar cantidad
+        window.changeQuantity = function(productId, delta) {
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(i => i.id !== productId);
+                }
+                updateCartUI();
+            }
+        }
+
+        // Eliminar del carrito
+        window.removeFromCart = function(productId) {
+            cart = cart.filter(i => i.id !== productId);
+            updateCartUI();
+        }
+
+        // Actualizar interfaz del carrito
+        function updateCartUI() {
+            cartItemsContainer.innerHTML = '';
+            
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+
+            if (cart.length === 0) {
+                cartItemsContainer.appendChild(emptyCartMessage);
+                emptyCartMessage.style.display = 'block';
+                cartSubtotal.textContent = '$0.00';
+                cartTotal.textContent = '$0.00';
+                whatsappCheckoutBtn.classList.add('disabled');
+                return;
+            }
+
+            emptyCartMessage.style.display = 'none';
+            let subtotal = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+
+                const div = document.createElement('div');
+                div.className = 'd-flex align-items-center justify-content-between border-bottom pb-3 mb-3';
+                div.innerHTML = `
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="${item.image}" alt="${item.model}" style="width: 55px; height: 55px; object-fit: contain; background: #e2e8f0; border-radius: 10px; padding: 4px;">
+                        <div>
+                            <h6 class="fw-bold mb-0 text-dark" style="font-size: 0.9rem;">${item.brand} ${item.model}</h6>
+                            <small class="text-muted">${item.size}</small>
+                            <div class="d-flex align-items-center gap-2 mt-1">
+                                <button onclick="changeQuantity(${item.id}, -1)" class="btn btn-outline-secondary btn-sm px-1.5 py-0" style="font-size: 0.75rem;"><i class="fa-solid fa-minus"></i></button>
+                                <span class="fw-bold small px-1">${item.quantity}</span>
+                                <button onclick="changeQuantity(${item.id}, 1)" class="btn btn-outline-secondary btn-sm px-1.5 py-0" style="font-size: 0.75rem;"><i class="fa-solid fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <span class="fw-bold text-dark d-block mb-1" style="font-size: 0.95rem;">$${itemTotal.toFixed(2)}</span>
+                        <button onclick="removeFromCart(${item.id})" class="text-danger border-0 bg-transparent p-0" style="font-size: 0.85rem;"><i class="fa-solid fa-trash-can"></i></button>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(div);
+            });
+
+            cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+            cartTotal.textContent = `$${subtotal.toFixed(2)}`;
+            whatsappCheckoutBtn.classList.remove('disabled');
+
+            generateWhatsAppLink(subtotal);
+        }
+
+        // Generar enlace formateado para WhatsApp
+        function generateWhatsAppLink(total) {
+            let message = "Hola *San Giorgi Neumáticos*, me gustaría solicitar el siguiente pedido:\n\n";
+            cart.forEach((item, index) => {
+                message += `${index + 1}. *${item.brand} ${item.model}*\n`;
+                message += `   - Medida: ${item.size}\n`;
+                message += `   - Cantidad: ${item.quantity}\n`;
+                message += `   - Precio unit.: $${item.price.toFixed(2)}\n`;
+                message += `   - Subtotal: $${(item.price * item.quantity).toFixed(2)}\n\n`;
+            });
+            message += `*Total General: $${total.toFixed(2)}*\n\n`;
+            message += "Quedo a la espera de confirmación de disponibilidad y métodos de pago. ¡Muchas gracias!";
+
+            const encodedMessage = encodeURIComponent(message);
+            const phoneNumber = "584120000000"; 
+            whatsappCheckoutBtn.onclick = function() {
+                window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
+            };
+        }
+
+        // Scroll Reveal Observer para animaciones de entrada suaves
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderProducts(products);
+            document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
